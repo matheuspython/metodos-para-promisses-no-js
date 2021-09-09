@@ -6,7 +6,10 @@ function rand(min, max) {
 
 function espera(mensagem, tempo){
   return new Promise((resolve, reject) => {
-    if(typeof mensagem !== 'string') reject(false);
+    if(typeof mensagem !== 'string') {
+      reject("deu erro")
+      return
+    };
 
     setTimeout(()=> {
       resolve(mensagem + ' promisse aceita')
@@ -26,6 +29,7 @@ function espera(mensagem, tempo){
 
   vc passa um array com promisses ou valores ja resolvidos
   e ele vai te retornar uma promessa com os valores dentro de um array
+  se uma delas der erro vai retornar só o erro
 */
 const promises = [
   'valor 1',
@@ -38,7 +42,7 @@ const promises = [
 Promise.all(promises).then(function(valor){
   console.log(valor)
 }).catch(function(error){
-  console.log(error)
+  console.log(error)// se der erro vai retornar o erro
 })
 
 /* retorno
@@ -49,4 +53,20 @@ Promise.all(promises).then(function(valor){
    'Promisse 3',
    'outro valor'
   ]
+*/
+
+/*
+  Promise.race
+
+  vc passa um array com promessas e a primeira a ser resolvida sera a retornada mas precisa ser uma promise
+*/
+
+Promise.race(promises)
+.then(value => console.log(value))
+.catch(erro => console.log(erro))
+
+
+/*
+  retorno
+    valor 1
 */
