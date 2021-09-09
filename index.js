@@ -70,3 +70,25 @@ Promise.race(promises)
   retorno
     valor 1
 */
+
+
+
+/*
+  Promise.resolve
+  retorna uma promessa ja resolvida
+*/
+function baixaPaginna(){
+  const emCache = true;
+
+  if(emCache){
+    return Promise.resolve('pagina em cache')
+  }else{
+    espera('Baixei a pagina', 3000)
+  }
+}
+
+baixaPaginna()
+.then(dadosPagina =>{
+  console.log(dadosPagina)
+})
+.catch(err => console.log(err))
